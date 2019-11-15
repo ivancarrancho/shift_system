@@ -1,43 +1,43 @@
 import datetime
 
-from flask import Flask, escape, request
+from flask import Blueprint
+from flask import request
 from flask import render_template
-from flask_socketio import SocketIO, emit
-from rock import take_shift
-from flask_pymongo import PyMongo
+# from flask_socketio import SocketIO, emit
+from .rock import take_shift
+from .extensions import mongo
 
 
-app = Flask(__name__)
-socketio = SocketIO(app)
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/myDatabase'
-mongo = PyMongo(app)
+main = Blueprint('main', __name__)
 
 
-@app.route('/')
+@main.route('/')
 def index():
-    print('********************+')
     # print(mongo)
-
+    # client = pymongo.MongoClient("")
+    # db = client.test
     # mongo.db.inventory.insert_one({'name': 'ivan'})
-
-    # print(mongo.db.inventory.find({'name': 'ivan'}))
+    collections = mongo.db.users
+    collections.insert({'Hola': 'bitchis'})
 
     name = request.args.get('name', 'Estudiante')
     return render_template('index.html', name=name)
 
 
-@app.route('/solicitar/')
+@main.route('/solicitar/')
 def hello_name(name=None):
     name = request.args.get('name', 'Estudiante')
+    shift = request.args.get('shift')
     return render_template(
         'hello.html',
         url=name.replace(' ', '_'),
         name=name,
-        date=str(datetime.datetime.now().date())
+        date=str(datetime.datetime.now().date()),
+        shift=shift
     )
 
 
-@app.route('/shift_system/')
+@main.route('/shift_system/')
 def shift_system(name=None):
     name = request.args.get('name', 'Estudiante')
     date = request.args.get('date', '--')
@@ -48,10 +48,10 @@ def shift_system(name=None):
     )
 
 
-@app.route('/ask-shift/<choice>/')
+@main.route('/ask-shift/<choice>/')
 def ask_shift(choice):
     return take_shift(choice=choice)
 
 
-if __name__ == '__main__':
-    socketio.run(app)
+# if __name__ == '__main__':
+#     socketio.run(app)

@@ -87,6 +87,19 @@
             <form action="/solicitar/">
                 <h3>Por favor ingresa tu nombre:</h3>
                 <input type="text" name='name'>
+                <br>
+                <br>
+                <h3>Turno:</h3>
+                <select name='shift'>
+                    <option value="Estudiantes_Nuevos">Estudiantes Nuevos</option>
+                    <option value="Estudiantes_Antiguos">Estudiantes Antiguos</option>
+                    <option value="Coop_Uniminuto">Coop Uniminuto</option>
+                    <option value="Postgrados">Postgrados</option>
+                    <option value="Pichincha">Pichincha</option>
+                    <option value="Reclamos">Reclamos</option>
+                </select>
+                <br>
+                <br>
                 <input class='btn  btn-primary btn-sm' type="submit" value="Enviar" >
             </form>
         </div>
@@ -102,10 +115,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <form action="" method='GET'>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/A/">Caso A</button>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/B/">Caso B</button>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/C/">Caso C</button>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/D/">Caso D</button>
+                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Estudiantes_Nuevos/">Estudiantes Nuevos</button>
+                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Estudiantes_Antiguos/">Estudiantes Antiguos</button>
+                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Coop_Uniminuto/">Coop Uniminuto</button>
                     </form>
                 </div>
             </div>
@@ -113,10 +125,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <form action="" method='GET'>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/E/">Caso E</button>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/F/">Caso F</button>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/G/">Caso G</button>
-                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/H/">Caso H</button>
+                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Postgrados/">Postgrados</button>
+                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Pichincha/">Pichincha</button>
+                        <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Reclamos/">Reclamos</button>
                     </form>
                 </div>
             </div>
