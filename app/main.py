@@ -24,7 +24,13 @@ list_dict = {
     'Coop_Uniminuto': '5dcf3565e1633863d890a91c',
     'Postgrados': '5dcf3565e1633863d890a91d',
     'Pichincha': '5dcf3565e1633863d890a91e',
-    'Reclamos': '5dcf3565e1633863d890a91f'
+    'Reclamos': '5dcf3565e1633863d890a91f',
+    'Estudiantes_Nuevos_shift': '5dd1f0133e0b854b1854952f',
+    'Estudiantes_Antiguos_shift': '5dd1f0133e0b854b18549530',
+    'Coop_Uniminuto_shift': '5dd1f0133e0b854b18549531',
+    'Postgrados_shift': '5dd1f0133e0b854b18549532',
+    'Pichincha_shift': '5dd1f0133e0b854b18549533',
+    'Reclamos_shift': '5dd1f0133e0b854b18549534',
 }
 
 
@@ -50,7 +56,7 @@ def empty():
         newvalues = {'$set': {key: 0}}
         collections.update_one({'_id': ObjectId(value)}, newvalues)
 
-    return {'ok': True}
+    return render_template('admin_module.html', empty=True)
 
 
 @main.route('/')
@@ -74,12 +80,14 @@ def index():
 def hello_name(name=None):
     name = request.args.get('name', 'Estudiante')
     shift = request.args.get('shift')
+    s_shift = sum_shift(key=shift)
     return render_template(
         'hello.html',
         url=name.replace(' ', '_'),
         name=name,
         date=str(datetime.datetime.now().date()),
-        shift=shift
+        shift=shift,
+        s_shift=s_shift
     )
 
 
@@ -89,39 +97,54 @@ def shift_system(name=None):
     name = request.args.get('name', 'Estudiante')
     date = request.args.get('date', '--')
     shift = request.args.get('shift')
-
-    actual_shift = sum_shift(key=shift)
+    s_shift = request.args.get('s_shift')
 
     return render_template(
         'shift_system.html',
         name=name.replace('_', ' '),
         date=date,
         shift=shift,
-        actual_shift=actual_shift if actual_shift else '-',
+        actual_shift=shift,
+        s_shift=s_shift,
         Estudiantes_Nuevos=collections.find_one(
-            {'_id': ObjectId(list_dict['Estudiantes_Nuevos'])}
-        ).get('Estudiantes_Nuevos'),
+            {'_id': ObjectId(list_dict['Estudiantes_Nuevos_shift'])}
+        ).get('Estudiantes_Nuevos_shift'),
         Estudiantes_Antiguos=collections.find_one(
-            {'_id': ObjectId(list_dict['Estudiantes_Antiguos'])}
-        ).get('Estudiantes_Antiguos'),
+            {'_id': ObjectId(list_dict['Estudiantes_Antiguos_shift'])}
+        ).get('Estudiantes_Antiguos_shift'),
         Coop_Uniminuto=collections.find_one(
-            {'_id': ObjectId(list_dict['Coop_Uniminuto'])}
-        ).get('Coop_Uniminuto'),
+            {'_id': ObjectId(list_dict['Coop_Uniminuto_shift'])}
+        ).get('Coop_Uniminuto_shift'),
         Postgrados=collections.find_one(
-            {'_id': ObjectId(list_dict['Postgrados'])}
-        ).get('Postgrados'),
+            {'_id': ObjectId(list_dict['Postgrados_shift'])}
+        ).get('Postgrados_shift'),
         Pichincha=collections.find_one(
-            {'_id': ObjectId(list_dict['Pichincha'])}
-        ).get('Pichincha'),
+            {'_id': ObjectId(list_dict['Pichincha_shift'])}
+        ).get('Pichincha_shift'),
         Reclamos=collections.find_one(
-            {'_id': ObjectId(list_dict['Reclamos'])}
-        ).get('Reclamos'),
+            {'_id': ObjectId(list_dict['Reclamos_shift'])}
+        ).get('Reclamos_shift'),
     )
 
 
 @main.route('/ask-shift/<choice>/')
 def ask_shift(choice):
-    return take_shift(choice=choice)
+    sum_shift(key=choice)
+    # collections = mongo.db.users
+
+    # estudiantes_nuevos = collections.insert({'Estudiantes_Nuevos_shift': 0})
+    # estudiantes_antiguos = collections.insert({'Estudiantes_Antiguos_shift': 0})
+    # coop_uniminuto = collections.insert({'Coop_Uniminuto_shift': 0})
+    # postgrados = collections.insert({'Postgrados_shift': 0})
+    # pichincha = collections.insert({'Pichincha_shift': 0})
+    # reclamos = collections.insert({'Reclamos_shift': 0})
+
+    return render_template('change_shift.html', choice=choice)
+
+
+@main.route('/admin/')
+def admin_module():
+    return render_template('admin_module.html')
 
 
 # if __name__ == '__main__':

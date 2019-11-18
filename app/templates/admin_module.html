@@ -44,53 +44,50 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#portfolio">Turno papel</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li> -->
         </ul>
       </div>
     </div>
   </nav>
 
   <!-- Services -->
-  <section class="bg-light page-section" id="portfolio">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-            <h2>Bienvenido!</h2>
-            <h5>Hoy es: {{ date }}</h5>
-            <br>
-            <h4>Gracias por acceder {{ name }}, tu turno para {{ shift }} es:</h4>
-            <h1>{{ s_shift }}</h1>
-            <br>
-            <br>
-            <h3>Tabla de turnos:</h3>
-            <table class="col-lg-12 text-center">
-                <tr>
-                    <th>Estudiantes Nuevos -- {{ Estudiantes_Nuevos }}</th>
-                <tr>
-                    <th>Estudiantes Antiguos -- {{ Estudiantes_Antiguos }}</th>
-                <tr>
-                    <th>Coop Uniminuto -- {{ Coop_Uniminuto }}</th>
-                <tr>
-                    <th>Postgrados -- {{ Postgrados }}</th>
-                <tr>
-                    <th>Pichincha -- {{ Pichincha }}</th>
-                <tr>
-                    <th>Reclamos -- {{ Reclamos }}</th>
-                </tr>
-            </table>
+  <section class="page-section" id="portfolio">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>Turno a cambiar:</h3>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <form action="" method='GET'>
+                            <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Estudiantes_Nuevos_shift/">Estudiantes Nuevos</button>
+                            <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Estudiantes_Antiguos_shift/">Estudiantes Antiguos</button>
+                            <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Coop_Uniminuto_shift/">Coop Uniminuto</button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <form action="" method='GET'>
+                            <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Postgrados_shift/">Postgrados</button>
+                            <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Pichincha_shift/">Pichincha</button>
+                            <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/ask-shift/Reclamos_shift/">Reclamos</button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <form action="" method='GET'>
+                    <button class='btn  btn-primary btn-xl' type="submit" formaction="http://127.0.0.1:5000/empty/">Empezar de ceros</button>
+                </form>
+                {% if empty %}
+                    <br>
+                    <h4>Turnos reiniciados correctamente...</h4>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    </div>
-  </section>
-
+        </div>
+      </section>
 
   <!-- Footer -->
   <footer class="footer">
@@ -138,15 +135,7 @@
   <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <script src="/static/js/jqBootstrapValidation.js"></script>
-  <!-- <script src="/static/js/contact_me.js"></script>
 
-  <script src="/static/js/agency.min.js"></script> -->
-    <script>
-        var load = setTimeout(function() {
-            location.reload();
-        }, 5000);
-
-    </script>
 </body>
 
 </html>

@@ -68,10 +68,10 @@
             {% else %}
             <h1>Hola, Estudiante!</h1>
             {% endif %}
-            <h2>Turno {{ shift }}</h1>
+            <h2>Turno {{ s_shift }} para {{ shift }}</h1>
 
-            <!-- <input id="text" type="text" value="http://127.0.0.1:5000/shift_system/?date={{date}}/" style="width:80%" hidden/><br /> -->
-            <input id="text" type="text" value="https://79d57d6a.ngrok.io/shift_system/?date={{ date }}&name={{ url }}&shift={{ shift }}" style="width:80%" hidden/><br />
+            <input id="text" type="text" value="http://127.0.0.1:5000/shift_system/?date={{ date }}&name={{ url }}&shift={{ shift }}&s_shift={{ s_shift }}" style="width:80%" hidden/><br />
+            <!-- <input id="text" type="text" value="https://79d57d6a.ngrok.io/shift_system/?date={{ date }}&name={{ url }}&shift={{ shift }}&s_shift={{ s_shift }}" style="width:80%" hidden/><br /> -->
         </div>
         </div>
     </div>
